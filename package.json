@@ -1,0 +1,14 @@
+{
+  "name": "orbit-flip",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A tiny one-button arcade game about finding your flow.",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

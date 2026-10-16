@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1114">
+    <meta name="description" content="One button. One orbit. One more try. Flip direction, collect sparks, and find your flow in this free browser arcade game.">
+    <title>Orbit Flip - One more try.</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Orbit Flip home">
+          <img src="./assets/favicon.svg" width="36" height="36" alt="">
+          <span>orbit<span class="brand-light">flip</span><span class="brand-period">.</span></span>
+        </a>
+        <div class="header-right">
+          <span class="edition">A LITTLE ARCADE ESCAPE</span>
+          <button class="icon-button" id="sound-button" type="button" aria-label="Turn sound on" aria-pressed="false" title="Turn sound on">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M11 5 6 9H3v6h3l5 4V5Z"/>
+              <path id="sound-waves" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" hidden/>
+              <path id="sound-slash" d="m16 9 5 6m0-6-5 6"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow"><span class="status-dot"></span> SMALL GAME. BIG "ONE MORE TRY" ENERGY.</p>
+            <h1 id="page-title">Go with the flow.<br><span>Until you flip it.</span></h1>
+            <p class="intro-copy">One button. One orbit. How long can you keep your cool?</p>
+          </div>
+          <div class="intro-note" aria-hidden="true"><span class="note-arrow">&#10549;</span> easy to play.<br>hard to walk away.</div>
+        </section>
+
+        <div class="game-layout">
+          <section class="game-card" id="game-card" aria-label="Orbit Flip game">
+            <div class="scoreboard">
+              <div class="score-cell"><span class="stat-label">YOUR SCORE</span><strong id="score">000</strong></div>
+              <div class="score-cell"><span class="stat-label"><span class="tiny-star" aria-hidden="true">&#10022;</span> PERSONAL BEST</span><strong id="best">000</strong></div>
+              <div class="score-cell multiplier-cell"><span class="stat-label">MULTIPLIER</span><strong id="multiplier">1<span>&times;</span></strong></div>
+            </div>
+
+            <div class="arena" id="arena" tabindex="0" role="group" aria-label="Playfield. Press Space or tap to start or flip direction. Press P to pause.">
+              <canvas id="game-canvas" width="600" height="520" aria-hidden="true"></canvas>
+              <div class="arena-topline">
+                <span class="arena-status"><span class="status-dot" id="game-status-dot"></span><span id="game-status">READY WHEN YOU ARE</span></span>
+                <div class="arena-actions" id="arena-actions">
+                  <button id="pause-button" type="button" class="arena-button" aria-label="Pause game" title="Pause (P)" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10M11 3v10" stroke="currentColor" stroke-width="2.5"/></svg></button>
+                  <button id="fullscreen-button" type="button" class="arena-button" aria-label="Enter fullscreen" aria-pressed="false" aria-controls="game-card" title="Enter fullscreen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path id="fullscreen-icon" d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="orbit-center" id="orbit-center" hidden>
+                <span class="direction-arrow" id="direction-arrow" aria-hidden="true">&#8635;</span>
+                <span class="direction-label" id="direction-label">CLOCKWISE</span>
+                <span class="collect-feedback" id="collect-feedback">FIND YOUR FLOW</span>
+              </div>
+              <div class="game-overlay" id="game-overlay">
+                <span class="overlay-kicker" id="overlay-kicker">GET INTO THE LOOP</span>
+                <h2 id="overlay-title">A new spin on<br>one more try.</h2>
+                <p id="overlay-copy">Collect sparks. Dodge the red.<br>You know what to do.</p>
+                <button class="primary-button" id="play-button" type="button">Let's orbit <span aria-hidden="true">&#8599;</span></button>
+                <span class="overlay-hint" id="overlay-hint">or press <kbd>space</kbd></span>
+              </div>
+              <div class="arena-bottomline"><span id="level-label">LEVEL 01 <span class="separator">/</span> A GENTLE START</span><span id="timer">00:00</span></div>
+            </div>
+            <div class="game-controls">
+              <span class="control-help"><kbd>space</kbd><span>or tap the orbit to flip</span></span>
+              <button class="flip-button" id="flip-button" type="button"><span aria-hidden="true">&#8646;</span> Flip direction</button>
+            </div>
+            <p class="storage-note" id="storage-note" role="status" hidden></p>
+            <p class="sr-only" id="announcer" role="status" aria-live="polite"></p>
+          </section>
+
+          <aside class="sidebar" aria-label="How to play">
+            <div class="how-to">
+              <p class="eyebrow">THE SHORT VERSION</p>
+              <h2>Less rules.<br> More reflexes.</h2>
+              <ol class="rules">
+                <li><span class="rule-icon ball-icon" aria-hidden="true"></span><div><h3>You're the little dot.</h3><p>Always on the move.<br>Tap or hit Space to reverse.</p></div></li>
+                <li><span class="rule-icon spark-icon" aria-hidden="true">&#10022;</span><div><h3>Follow the sparks.</h3><p>Pick up the purple ones.<br>Every 5 boosts your multiplier, up to 3&times;.</p></div></li>
+                <li><span class="rule-icon hazard-icon" aria-hidden="true"></span><div><h3>Red means rethink.</h3><p>Dashed arcs are a warning.<br>When they turn solid, stay away.</p></div></li>
+              </ol>
+            </div>
+            <div class="tip-card">
+              <span class="tip-label"><span aria-hidden="true">&#8599;</span> A FRIENDLY TIP</span>
+              <p>Sometimes going back<br>is how you get ahead.</p>
+              <span class="tip-footnote">Don't be afraid to flip early.</span>
+            </div>
+            <p class="pause-help"><kbd>P</kbd> to pause. A breath always helps.</p>
+          </aside>
+        </div>
+        <noscript><p class="storage-note">Orbit Flip needs JavaScript to play. Enable it in your browser, then reload.</p></noscript>
+      </main>
+
+      <footer class="site-footer">
+        <span>Made for the joy of <span class="footer-accent">one more try.</span></span>
+        <span>BUILT WITH GITHUB COPILOT <span class="footer-dot">/</span> NO DOWNLOADS. JUST PLAY.</span>
+      </footer>
+    </div>
+  </body>
+</html>
